@@ -226,6 +226,8 @@ class ManageUserController extends Controller
         ]);
 
 
+        
+
         if ($request->filled('change_pass')) {
             $user->password = Hash::make($request->change_pass);
         }
