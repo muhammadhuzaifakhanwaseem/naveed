@@ -92,6 +92,7 @@
                                 type="button" role="tab" aria-controls="password"
                                 aria-selected="false">{{ __('Password Change') }}</button>
                         </li>
+                        {{-- cim --}}
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="balance-tab" data-toggle="tab" data-target="#balance"
                                 type="button" role="tab" aria-controls="balance" aria-selected="false">
