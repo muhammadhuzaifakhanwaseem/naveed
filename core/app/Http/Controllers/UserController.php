@@ -178,90 +178,22 @@ class UserController extends Controller
     }
 
 
-    // public function withdrawCompleted(Request $request)
-    // {
-    //     $general = GeneralSetting::first();
-
-    //     // Check per-day withdrawal limit
-    //     $withdrawCount = Withdraw::where('user_id', auth()->id())->whereDate('created_at', now())->count();
-    //     if ($general->withdraw_limit <= $withdrawCount) {
-    //         return back()->with('error', 'Per day withdrawal limit exceeded');
-    //     }
-
-    //     // Validate only the amount input
-    //     $request->validate([
-    //         'amount' => 'required|numeric',
-    //     ]);
-
-    //     // Check if the user has an account bound
-    //     $accountBind = AccountBind::where('user_id', auth()->id())->first();
-    //     if (!$accountBind) {
-    //         return redirect(url('account/bind'))->with('error', 'You need to bind an account before withdrawing.');
-    //     }
-
-    //     // Fetch the withdrawal method from account_binds
-    //     $withdrawMethod = WithdrawGateway::findOrFail($accountBind->withdraw_method_id);
-
-    //     // Check if user has enough balance
-    //     if (auth()->user()->balance < $request->amount) {
-    //         return back()->with('error', 'Insufficient Balance');
-    //     }
-
-    //     // Check withdraw limits
-    //     if ($request->amount < $withdrawMethod->min_amount || $request->amount > $withdrawMethod->max_amount) {
-    //         return back()->with('error', 'Please follow the withdrawal limits');
-    //     }
-
-    //     // Calculate withdrawal charge
-    //     if ($withdrawMethod->charge_type == 'percent') {
-    //         $total = $request->amount + ($withdrawMethod->charge * $request->amount) / 100;
-    //     } else {
-    //         $total = $request->amount + $withdrawMethod->charge;
-    //     }
-
-    //     // Deduct balance
-    //     auth()->user()->balance -= $total;
-    //     auth()->user()->save();
-
-    //     // Store withdrawal data
-    //     Withdraw::create([
-    //         'user_id' => auth()->id(),
-    //         'withdraw_method_id' => $accountBind->withdraw_method_id,
-    //         'transaction_id' => strtoupper(Str::random(15)),
-    //         'user_withdraw_prof' => [
-    //             'email' => $accountBind->email,
-    //             'account_information' => $accountBind->account_information,
-    //             'note' => $accountBind->note,
-    //         ],
-    //         'withdraw_charge' => $withdrawMethod->charge,
-    //         'withdraw_amount' => $request->amount,
-    //         'status' => 0
-    //     ]);
-
-    //     return redirect(url('withdraw'))->with('success', 'Withdraw Successfully done.');
-    // }
-
     public function withdrawCompleted(Request $request)
     {
+        $general = GeneralSetting::first();
         $checkInvest = Payment::where('user_id', Auth::id())->where('payment_status', 1)->exists();
-
         if (!$checkInvest) {
             return redirect(url('dashboard'))->with('error', 'Please invest first before withdrawing.');
         }
-        $general = GeneralSetting::first();
-
         // Check per-day withdrawal limit
-        $withdrawCount = Withdraw::where('user_id', auth()->id())
-            ->whereDate('created_at', now())
-            ->count();
-
+        $withdrawCount = Withdraw::where('user_id', auth()->id())->whereDate('created_at', now())->count();
         if ($general->withdraw_limit <= $withdrawCount) {
             return back()->with('error', 'Per day withdrawal limit exceeded');
         }
 
         // Validate only the amount input
         $request->validate([
-            'amount' => 'required|numeric|min:1',
+            'amount' => 'required|numeric',
         ]);
 
         // Check if the user has an account bound
@@ -273,27 +205,25 @@ class UserController extends Controller
         // Fetch the withdrawal method from account_binds
         $withdrawMethod = WithdrawGateway::findOrFail($accountBind->withdraw_method_id);
 
-        // Check withdraw limits
         if ($request->amount < $withdrawMethod->min_amount || $request->amount > $withdrawMethod->max_amount) {
-            return back()->with('error', 'Please follow the withdrawal limits.');
+            return back()->with('error', 'Please follow the withdrawal limits');
         }
+        if ($withdrawMethod->charge_type == 'percent') {
+            $total = $request->amount + ($withdrawMethod->charge * $request->amount) / 100;
+        } else {
+            $total = $request->amount + $withdrawMethod->charge;
+        }
+        // Check if user has enough balance
+        if (auth()->user()->balance < $total) {
+            return back()->with('error', 'Insufficient Balance');
+        }
+
+        // Check withdraw limits
 
         // Calculate withdrawal charge
-        if ($withdrawMethod->charge_type == 'percent') {
-            $withdrawCharge = ($withdrawMethod->charge * $request->amount) / 100;
-        } else {
-            $withdrawCharge = $withdrawMethod->charge;
-        }
-
-        $totalAmount = $request->amount + $withdrawCharge;
-
-        // Check if user has enough balance (including charge)
-        if (auth()->user()->balance < $totalAmount) {
-            return back()->with('error', 'Insufficient balance including withdrawal charge.');
-        }
 
         // Deduct balance
-        auth()->user()->balance -= $totalAmount;
+        auth()->user()->balance -= $total;
         auth()->user()->save();
 
         // Store withdrawal data
@@ -306,13 +236,86 @@ class UserController extends Controller
                 'account_information' => $accountBind->account_information,
                 'note' => $accountBind->note,
             ],
-            'withdraw_charge' => $withdrawCharge,
+            'withdraw_charge' => $withdrawMethod->charge,
             'withdraw_amount' => $request->amount,
             'status' => 0
         ]);
 
-        return redirect(url('withdraw'))->with('success', 'Withdraw successfully completed.');
+        return redirect(url('withdraw'))->with('success', 'Withdraw Successfully done.');
     }
+
+    // public function withdrawCompleted(Request $request)
+    // {
+    //     $checkInvest = Payment::where('user_id', Auth::id())->where('payment_status', 1)->exists();
+
+    //     if (!$checkInvest) {
+    //         return redirect(url('dashboard'))->with('error', 'Please invest first before withdrawing.');
+    //     }
+    //     $general = GeneralSetting::first();
+
+    //     // Check per-day withdrawal limit
+    //     $withdrawCount = Withdraw::where('user_id', auth()->id())
+    //         ->whereDate('created_at', now())
+    //         ->count();
+
+    //     if ($general->withdraw_limit <= $withdrawCount) {
+    //         return back()->with('error', 'Per day withdrawal limit exceeded');
+    //     }
+
+    //     // Validate only the amount input
+    //     $request->validate([
+    //         'amount' => 'required|numeric|min:1',
+    //     ]);
+
+    //     // Check if the user has an account bound
+    //     $accountBind = AccountBind::where('user_id', auth()->id())->first();
+    //     if (!$accountBind) {
+    //         return redirect(url('account/bind'))->with('error', 'You need to bind an account before withdrawing.');
+    //     }
+
+    //     // Fetch the withdrawal method from account_binds
+    //     $withdrawMethod = WithdrawGateway::findOrFail($accountBind->withdraw_method_id);
+
+    //     // Check withdraw limits
+    //     if ($request->amount < $withdrawMethod->min_amount || $request->amount > $withdrawMethod->max_amount) {
+    //         return back()->with('error', 'Please follow the withdrawal limits.');
+    //     }
+
+    //     // Calculate withdrawal charge
+    //     if ($withdrawMethod->charge_type == 'percent') {
+    //         $withdrawCharge = ($withdrawMethod->charge * $request->amount) / 100;
+    //     } else {
+    //         $withdrawCharge = $withdrawMethod->charge;
+    //     }
+
+    //     $totalAmount = $request->amount + $withdrawCharge;
+
+    //     // Check if user has enough balance (including charge)
+    //     if (auth()->user()->balance < $totalAmount) {
+    //         return back()->with('error', 'Insufficient balance including withdrawal charge.');
+    //     }
+
+    //     // Deduct balance
+    //     auth()->user()->balance -= $totalAmount;
+    //     auth()->user()->save();
+
+    //     // Store withdrawal data
+    //     Withdraw::create([
+    //         'user_id' => auth()->id(),
+    //         'withdraw_method_id' => $accountBind->withdraw_method_id,
+    //         'transaction_id' => strtoupper(Str::random(15)),
+    //         'user_withdraw_prof' => [
+    //             'email' => $accountBind->email,
+    //             'account_information' => $accountBind->account_information,
+    //             'note' => $accountBind->note,
+    //         ],
+    //         'withdraw_charge' => $withdrawCharge,
+    //         'withdraw_amount' => $request->amount,
+    //         'status' => 0
+    //     ]);
+
+    //     return redirect(url('withdraw'))->with('success', 'Withdraw successfully completed.');
+    // }
 
 
     public function accountBind()
