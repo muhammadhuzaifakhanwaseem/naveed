@@ -348,16 +348,16 @@
                     </div>
                     <div class="col-3">
                         <div class="mobile-box link-item">
-                            <a href="<?php echo e(route('user.transaction.log')); ?>" class="item-link"></a>
-                            <img src="<?php echo e(asset('asset/theme4/images/d-icon/6.png')); ?>" alt="icon">
-                            <h6 class="title"><?php echo e(__('Support')); ?></h6>
+                            <a href="<?php echo e(route('user.commision')); ?>" class="item-link"></a>
+                            <img src="<?php echo e(asset('asset/theme4/images/d-icon/7.png')); ?>" alt="icon">
+                            <h6 class="title"><?php echo e(__('Settings')); ?></h6>
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="mobile-box link-item">
-                            <a href="<?php echo e(route('user.commision')); ?>" class="item-link"></a>
-                            <img src="<?php echo e(asset('asset/theme4/images/d-icon/7.png')); ?>" alt="icon">
-                            <h6 class="title"><?php echo e(__('Settings')); ?></h6>
+                            <a href="<?php echo e(route('user.team')); ?>" class="item-link"></a>
+                            <img src="<?php echo e(asset('asset/theme4/images/d-icon/6.png')); ?>" alt="icon">
+                            <h6 class="title"><?php echo e(__('My Team')); ?></h6>
                         </div>
                     </div>
                     <div class="col-3">

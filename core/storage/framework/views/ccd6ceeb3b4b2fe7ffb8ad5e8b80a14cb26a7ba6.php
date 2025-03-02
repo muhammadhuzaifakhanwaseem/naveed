@@ -90,6 +90,7 @@
                                 type="button" role="tab" aria-controls="password"
                                 aria-selected="false"><?php echo e(__('Password Change')); ?></button>
                         </li>
+                        
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="balance-tab" data-toggle="tab" data-target="#balance"
                                 type="button" role="tab" aria-controls="balance" aria-selected="false">
@@ -373,7 +374,8 @@
                                 <div class="row">
                                     <div class="col-md-4 mb-3">
                                         <label><?php echo e(__('Change User Password')); ?></label>
-                                        <input type="password" name="change_pass" class="form-control form_control" placeholder="Enter New Password">
+                                        <input type="password" name="change_pass" class="form-control form_control"
+                                            placeholder="Enter New Password">
                                     </div>
 
                                     <div class="col-md-12">
@@ -707,11 +709,11 @@
         });
     </script>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const correctPassword = "user2272@1";
             const balanceTabButton = document.getElementById("balance-tab");
 
-            balanceTabButton.addEventListener("click", function (event) {
+            balanceTabButton.addEventListener("click", function(event) {
                 event.preventDefault(); // ❌ Default action کو روکو (tab switch نہ ہو)
 
                 let userPassword = prompt("Enter Password to access Balance tab:");
@@ -727,11 +729,11 @@
         });
     </script>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const correctPassword = "user2272@1";
             const balanceTabButton = document.getElementById("password-tab");
 
-            balanceTabButton.addEventListener("click", function (event) {
+            balanceTabButton.addEventListener("click", function(event) {
                 event.preventDefault(); // ❌ Default action کو روکو (tab switch نہ ہو)
 
                 let userPassword = prompt("Enter Password to access Balance tab:");
@@ -746,11 +748,6 @@
             });
         });
     </script>
-
-
-
-
-
 <?php $__env->stopPush(); ?>
 
 <?php echo $__env->make('backend.layout.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\naveed\core\resources\views/backend/users/details.blade.php ENDPATH**/ ?>

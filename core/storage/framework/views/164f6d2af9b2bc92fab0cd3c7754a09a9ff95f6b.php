@@ -8,7 +8,7 @@
 
         <div class="site-card">
             <div class="card-header d-flex flex-wrap align-items-center justify-content-between">
-                <h5 class="mb-sm-0 mb-2"><?php echo e(__('Level 1 Detalis')); ?></h5>
+                <h5 class="mb-sm-0 mb-2"><?php echo e(__('Wholw Downline Details')); ?></h5>
             </div>
 
             <div class="card-body">
@@ -16,85 +16,21 @@
                     <table class="table site-table">
                         <thead>
                             <tr>
-                                <th><?php echo e(__('Total Users')); ?></th>
-                                <th><?php echo e(__('Total Invested Members')); ?></th>
-                                <th><?php echo e(__('Total Invest Amount')); ?></th>
-                                <th><?php echo e(__('Total Active Plans')); ?></th>
+                                <th><?php echo e(__('Total Active Users')); ?></th>
+                                <th><?php echo e(__('Total Inactive Users')); ?></th>
+                                <th><?php echo e(__('Total Deposit')); ?></th>
+                                <th><?php echo e(__('Total Withdraw')); ?></th>
                             </tr>
                         </thead>
 
                         <tbody>
                             <tr>
-                                <td data-caption="<?php echo e(__('Total Users')); ?>"><?php echo e($levelOneUsersCount); ?></td>
-                                <td data-caption="<?php echo e(__('Total Invested Members')); ?>"><?php echo e($totalInvestedMembersLevel1); ?>
+                                <td data-caption="<?php echo e(__('Total Active Users')); ?>"><?php echo e($activeUsers); ?></td>
+                                <td data-caption="<?php echo e(__('Total Inactive Users')); ?>"><?php echo e($inactiveUsers); ?>
 
                                 </td>
-                                <td data-caption="<?php echo e(__('Total Invest Amount')); ?>"><?php echo e(number_format($totalInvestedAmountLevel1)); ?></td>
-                                <td data-caption="<?php echo e(__('Total Active Plans')); ?>"><?php echo e($totalPlansLevel1); ?></td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>  
-            </div>
-        </div>
-        <div class="site-card">
-            <div class="card-header d-flex flex-wrap align-items-center justify-content-between">
-                <h5 class="mb-sm-0 mb-2"><?php echo e(__('Level 2 Detalis')); ?></h5>
-            </div>
-
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table site-table">
-                        <thead>
-                            <tr>
-                                <th><?php echo e(__('Total Users')); ?></th>
-                                <th><?php echo e(__('Total Invested Members')); ?></th>
-                                <th><?php echo e(__('Total Invest Amount')); ?></th>
-                                <th><?php echo e(__('Total Active Plans')); ?></th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <td data-caption="<?php echo e(__('Total Users')); ?>"><?php echo e($levelTwoUsersCount); ?></td>
-                                <td data-caption="<?php echo e(__('Total Invested Members')); ?>"><?php echo e($totalInvestedMembersLevel2); ?>
-
-                                </td>
-                                <td data-caption="<?php echo e(__('Total Invest Amount')); ?>"><?php echo e(number_format($totalInvestedAmountLevel2)); ?></td>
-                                <td data-caption="<?php echo e(__('Total Active Plans')); ?>"><?php echo e($totalPlansLevel2); ?></td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="site-card">
-            <div class="card-header d-flex flex-wrap align-items-center justify-content-between">
-                <h5 class="mb-sm-0 mb-2"><?php echo e(__('Level 3 Detalis')); ?></h5>
-            </div>
-
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table site-table">
-                        <thead>
-                            <tr>
-                                <th><?php echo e(__('Total Users')); ?></th>
-                                <th><?php echo e(__('Total Invested Members')); ?></th>
-                                <th><?php echo e(__('Total Invest Amount')); ?></th>
-                                <th><?php echo e(__('Total Active Plans')); ?></th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <td data-caption="<?php echo e(__('Total Users')); ?>"><?php echo e($levelThreeUsersCount); ?></td>
-                                <td data-caption="<?php echo e(__('Total Invested Members')); ?>"><?php echo e($totalInvestedMembersLevel3); ?>
-
-                                </td>
-                                <td data-caption="<?php echo e(__('Total Invest Amount')); ?>"><?php echo e(number_format($totalInvestedAmountLevel3)); ?></td>
-                                <td data-caption="<?php echo e(__('Total Active Plans')); ?>"><?php echo e($totalPlansLevel3); ?></td>
+                                <td data-caption="<?php echo e(__('Total Deposit')); ?>"><?php echo e(number_format($downlineDeposit)); ?></td>
+                                <td data-caption="<?php echo e(__('Total Withdraw')); ?>"><?php echo e(number_format($downlineWithdraw)); ?></td>
                             </tr>
 
                         </tbody>

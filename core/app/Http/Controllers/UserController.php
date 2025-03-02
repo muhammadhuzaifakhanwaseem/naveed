@@ -407,6 +407,39 @@ class UserController extends Controller
     public function PerfomanceChart()
     {
         $userId = auth()->user()->id;
+        // Get the downline of the user (including indirect referrals)
+        $downline = $this->getDownline($userId);
+
+        // Active and Inactive Users Calculation
+        $activeUsers = User::whereIn('id', $downline)->where('status', 1)->count();
+        $inactiveUsers = User::whereIn('id', $downline)->where('status', 0)->count();
+
+        // Total Deposit and Withdrawal for the Downline
+        $downlineDeposit = Deposit::whereIn('user_id', $downline)->where('payment_status', 1)->sum('final_amount');
+        $downlineWithdraw = Withdraw::whereIn('user_id', $downline)->where('status', 1)->sum('withdraw_amount');
+
+        return view($this->template . 'user.perfomance', compact(
+            'activeUsers',
+            'inactiveUsers',
+            'downlineDeposit',
+            'downlineWithdraw',
+        ));
+    }
+    public function getDownline($userId)
+    {
+        // Fetch all users who were referred by the given user
+        $downline = User::where('reffered_by', $userId)->pluck('id')->toArray();
+
+        // Recursively find the downline for all indirect referrals
+        foreach ($downline as $userId) {
+            $downline = array_merge($downline, $this->getDownline($userId));
+        }
+
+        return $downline;
+    }
+    public function TeamDetails()
+    {
+        $userId = auth()->user()->id;
 
         // **Step 1: Find Level 1 Users**
         $levelOneUsers = User::where('reffered_by', $userId)->pluck('id');
@@ -471,7 +504,7 @@ class UserController extends Controller
             ->distinct('user_id')
             ->count('user_id');
 
-        return view($this->template . 'user.perfomance', compact(
+        return view($this->template . 'user.team', compact(
             'levelOneUsersCount',
             'totalInvestedAmountLevel1',
             'totalPlansLevel1',
@@ -486,7 +519,6 @@ class UserController extends Controller
             'totalInvestedMembersLevel3'
         ));
     }
-
 
     public function returnInterest()
     {

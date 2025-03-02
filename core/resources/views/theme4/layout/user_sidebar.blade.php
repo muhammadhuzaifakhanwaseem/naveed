@@ -68,6 +68,9 @@
       <li class="{{singleMenu('user.ticket.index')}}">
         <a href="{{ route('user.ticket.index') }}"><i data-feather="life-buoy"></i> {{ __('Support') }}</a>
       </li>
+      <li class="{{singleMenu('user.team')}}">
+        <a href="{{ route('user.team') }}"><i data-feather="life-buoy"></i> {{ __('My Team') }}</a>
+      </li>
       @if (auth()->user()->is_perfomance == 1)
       <li class="{{singleMenu('user.perfomance.chart')}}">
         <a href="{{ route('user.perfomance.chart') }}"><i data-feather="file-text"></i> {{ __('Perfomance Chart') }}</a>

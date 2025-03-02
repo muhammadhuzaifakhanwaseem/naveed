@@ -367,8 +367,9 @@ Route::name('user.')->group(function () {
             Route::post('account/bind', [UserController::class, 'storeAccountBind']);
 
             Route::get('perfomancechart', [UserController::class, 'PerfomanceChart'])
-            ->name('perfomance.chart')
-            ->middleware('checkPerfomance');
+                ->name('perfomance.chart')
+                ->middleware('checkPerfomance');
+            Route::get('team/details', [UserController::class, 'TeamDetails'])->name('team');
 
             Route::resource('ticket', TicketController::class);
             Route::post('ticket/reply', [TicketController::class, 'reply'])->name('ticket.reply');

@@ -69,6 +69,9 @@
       <li class="<?php echo e(singleMenu('user.ticket.index')); ?>">
         <a href="<?php echo e(route('user.ticket.index')); ?>"><i data-feather="life-buoy"></i> <?php echo e(__('Support')); ?></a>
       </li>
+      <li class="<?php echo e(singleMenu('user.team')); ?>">
+        <a href="<?php echo e(route('user.team')); ?>"><i data-feather="life-buoy"></i> <?php echo e(__('My Team')); ?></a>
+      </li>
       <?php if(auth()->user()->is_perfomance == 1): ?>
       <li class="<?php echo e(singleMenu('user.perfomance.chart')); ?>">
         <a href="<?php echo e(route('user.perfomance.chart')); ?>"><i data-feather="file-text"></i> <?php echo e(__('Perfomance Chart')); ?></a>

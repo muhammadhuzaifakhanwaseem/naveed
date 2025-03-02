@@ -85,7 +85,7 @@
 
         <div class="site-card">
             <div class="card-header d-flex flex-wrap align-items-center justify-content-between">
-                <h5 class="mb-sm-0 mb-2">{{ __('Level 1 Detalis') }}</h5>
+                <h5 class="mb-sm-0 mb-2">{{ __('Wholw Downline Details') }}</h5>
             </div>
 
             <div class="card-body">
@@ -93,82 +93,20 @@
                     <table class="table site-table">
                         <thead>
                             <tr>
-                                <th>{{ __('Total Users') }}</th>
-                                <th>{{ __('Total Invested Members') }}</th>
-                                <th>{{ __('Total Invest Amount') }}</th>
-                                <th>{{ __('Total Active Plans') }}</th>
+                                <th>{{ __('Total Active Users') }}</th>
+                                <th>{{ __('Total Inactive Users') }}</th>
+                                <th>{{ __('Total Deposit') }}</th>
+                                <th>{{ __('Total Withdraw') }}</th>
                             </tr>
                         </thead>
 
                         <tbody>
                             <tr>
-                                <td data-caption="{{ __('Total Users') }}">{{ $levelOneUsersCount }}</td>
-                                <td data-caption="{{ __('Total Invested Members') }}">{{ $totalInvestedMembersLevel1 }}
+                                <td data-caption="{{ __('Total Active Users') }}">{{ $activeUsers}}</td>
+                                <td data-caption="{{ __('Total Inactive Users') }}">{{ $inactiveUsers }}
                                 </td>
-                                <td data-caption="{{ __('Total Invest Amount') }}">{{  number_format($totalInvestedAmountLevel1) }}</td>
-                                <td data-caption="{{ __('Total Active Plans') }}">{{ $totalPlansLevel1 }}</td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>  
-            </div>
-        </div>
-        <div class="site-card">
-            <div class="card-header d-flex flex-wrap align-items-center justify-content-between">
-                <h5 class="mb-sm-0 mb-2">{{ __('Level 2 Detalis') }}</h5>
-            </div>
-
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table site-table">
-                        <thead>
-                            <tr>
-                                <th>{{ __('Total Users') }}</th>
-                                <th>{{ __('Total Invested Members') }}</th>
-                                <th>{{ __('Total Invest Amount') }}</th>
-                                <th>{{ __('Total Active Plans') }}</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <td data-caption="{{ __('Total Users') }}">{{ $levelTwoUsersCount }}</td>
-                                <td data-caption="{{ __('Total Invested Members') }}">{{ $totalInvestedMembersLevel2 }}
-                                </td>
-                                <td data-caption="{{ __('Total Invest Amount') }}">{{  number_format($totalInvestedAmountLevel2) }}</td>
-                                <td data-caption="{{ __('Total Active Plans') }}">{{ $totalPlansLevel2 }}</td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="site-card">
-            <div class="card-header d-flex flex-wrap align-items-center justify-content-between">
-                <h5 class="mb-sm-0 mb-2">{{ __('Level 3 Detalis') }}</h5>
-            </div>
-
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table site-table">
-                        <thead>
-                            <tr>
-                                <th>{{ __('Total Users') }}</th>
-                                <th>{{ __('Total Invested Members') }}</th>
-                                <th>{{ __('Total Invest Amount') }}</th>
-                                <th>{{ __('Total Active Plans') }}</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <td data-caption="{{ __('Total Users') }}">{{ $levelThreeUsersCount }}</td>
-                                <td data-caption="{{ __('Total Invested Members') }}">{{ $totalInvestedMembersLevel3 }}
-                                </td>
-                                <td data-caption="{{ __('Total Invest Amount') }}">{{  number_format($totalInvestedAmountLevel3) }}</td>
-                                <td data-caption="{{ __('Total Active Plans') }}">{{ $totalPlansLevel3 }}</td>
+                                <td data-caption="{{ __('Total Deposit') }}">{{  number_format($downlineDeposit) }}</td>
+                                <td data-caption="{{ __('Total Withdraw') }}">{{ number_format($downlineWithdraw) }}</td>
                             </tr>
 
                         </tbody>

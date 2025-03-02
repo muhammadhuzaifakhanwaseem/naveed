@@ -345,16 +345,16 @@
                     </div>
                     <div class="col-3">
                         <div class="mobile-box link-item">
-                            <a href="{{ route('user.transaction.log') }}" class="item-link"></a>
-                            <img src="{{ asset('asset/theme4/images/d-icon/6.png') }}" alt="icon">
-                            <h6 class="title">{{ __('Support') }}</h6>
+                            <a href="{{ route('user.commision') }}" class="item-link"></a>
+                            <img src="{{ asset('asset/theme4/images/d-icon/7.png') }}" alt="icon">
+                            <h6 class="title">{{ __('Settings') }}</h6>
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="mobile-box link-item">
-                            <a href="{{ route('user.commision') }}" class="item-link"></a>
-                            <img src="{{ asset('asset/theme4/images/d-icon/7.png') }}" alt="icon">
-                            <h6 class="title">{{ __('Settings') }}</h6>
+                            <a href="{{ route('user.team') }}" class="item-link"></a>
+                            <img src="{{ asset('asset/theme4/images/d-icon/6.png') }}" alt="icon">
+                            <h6 class="title">{{ __('My Team') }}</h6>
                         </div>
                     </div>
                     <div class="col-3">
